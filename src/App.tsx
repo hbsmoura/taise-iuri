@@ -1,15 +1,21 @@
-import "@/App.css";
-import jsonList from "@/assets/data/lista-presentes.json";
-import Tai1 from "@/assets/img/tai1.png";
-import Tai2 from "@/assets/img/tai2.png";
-import Tai3 from "@/assets/img/tai3.png";
-import { GiftCard, type GiftCardProps } from "@/components/custom/gift-card";
-import { LittleHeart } from "@/components/custom/little-heart";
 import { Toaster } from "sonner";
-
-const listaPresentes: GiftCardProps[] = jsonList;
+import "./App.css";
+import Tai1 from "./assets/img/tai1.png";
+import Tai2 from "./assets/img/tai2.png";
+import Tai3 from "./assets/img/tai3.png";
+import { GiftCard, type GiftCardProps } from "./components/custom/gift-card";
+import { LittleHeart } from "./components/custom/little-heart";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [listaPresentes, setListaPresentes] = useState<GiftCardProps[]>([]);
+
+  useEffect(() => {
+    fetch("/data/lista-presentes.json")
+      .then((res) => res.json())
+      .then((data) => setListaPresentes(data));
+  }, []);
+
   return (
     <>
       <div className="fixed top-0 bottom-0 left-0 right-0 -z-1 opacity-80">
