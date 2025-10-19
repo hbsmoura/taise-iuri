@@ -11,7 +11,7 @@ function App() {
   const [listaPresentes, setListaPresentes] = useState<GiftCardProps[]>([]);
 
   useEffect(() => {
-    fetch("/data/lista-presentes.json")
+    fetch(`${import.meta.env.BASE_URL}data/lista-presentes.json`)
       .then((res) => res.json())
       .then((data) => setListaPresentes(data));
   }, []);
